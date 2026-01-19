@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>RetroWave Talk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #0a0a0a;
+        margin: 0;
+        overflow: hidden;
+        font-family: 'VT323', monospace;
+        /* Ensure the body takes up the full height to center the walkie-talkie */
+        height: 100vh;
+        height: -webkit-fill-available;
+      }
+
+      #root {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Global CRT Effects */
+      .crt-overlay {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: 
+          linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
+          linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+        background-size: 100% 3px, 3px 100%;
+      }
+
+      .crt-overlay::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.03);
+        opacity: 0;
+        z-index: 101;
+        pointer-events: none;
+        animation: scanline 8s linear infinite;
+        height: 100px;
+        background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+      }
+
+      @keyframes scanline {
+        0% { transform: translateY(-100vh); }
+        100% { transform: translateY(100vh); }
+      }
+
+      .crt-flicker {
+        animation: flicker 0.05s infinite;
+      }
+
+      @keyframes flicker {
+        0% { opacity: 0.992; }
+        20% { opacity: 0.998; }
+        40% { opacity: 0.991; }
+        60% { opacity: 0.999; }
+        80% { opacity: 0.993; }
+        100% { opacity: 1; }
+      }
+
+      .vignette {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 102;
+        background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.5) 120%);
+      }
+
+      .lcd-glow {
+        text-shadow: 0 0 8px rgba(0, 255, 102, 0.8), 0 0 20px rgba(0, 255, 102, 0.3);
+      }
+
+      .radio-button-shadow {
+        box-shadow: inset 0 2px 4px rgba(255,255,255,0.1), 0 6px 12px rgba(0,0,0,0.7);
+      }
+
+      .radio-button-active {
+        box-shadow: inset 0 4px 10px rgba(0,0,0,0.8);
+        transform: translateY(3px) scale(0.98);
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "@google/genai": "https://esm.sh/@google/genai@^1.37.0"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="crt-overlay"></div>
+    <div class="vignette"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

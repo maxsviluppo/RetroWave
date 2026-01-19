@@ -1,0 +1,7 @@
+{
+  "name": "RetroWave Talk",
+  "description": "A digital 1980s walkie-talkie powered by Gemini 2.5 Live API, featuring vintage audio filters, CRT visuals, and an AI-driven radio intelligence.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
